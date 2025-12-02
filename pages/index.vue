@@ -5,7 +5,7 @@
       <div class="hero-left">
         <h1>Hi Dev Tools</h1>
         <p class="hero-sub">
-          Bộ công cụ nhỏ hỗ trợ Dev Hi FPT: gửi thử API, format JSON, xem HTML, màu CSS, decode JWT, tạo MD5…
+          Bộ công cụ nhỏ hỗ trợ Dev : gửi thử API, format JSON, xem HTML, màu CSS, decode JWT, tạo MD5…
         </p>
 
         <div class="hero-meta">
