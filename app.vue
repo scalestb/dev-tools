@@ -4,15 +4,15 @@
       <div class="topbar-inner">
         <NuxtLink to="/" class="brand">
           <div class="brand-main">
-            <span class="brand-title">Hi Dev Tools</span>
-            <span class="brand-sub">Hỗ trợ Dev · Hi FPT</span>
+            <span class="brand-title">Hi Tools</span>
+            <span class="brand-sub">Hỗ trợ Dev · Cơ bản</span>
           </div>
         </NuxtLink>
 
         <nav class="nav">
-          <NuxtLink to="/tinh-nang/request-api-online" class="nav-link">
+          <!-- <NuxtLink to="/tinh-nang/request-api-online" class="nav-link">
             Request API
-          </NuxtLink>
+          </NuxtLink> -->
           <NuxtLink to="/tinh-nang/json-formatter" class="nav-link">
             JSON Formatter
           </NuxtLink>
@@ -41,14 +41,14 @@
     <footer class="footer">
       <div class="footer-inner">
         <div class="footer-left">
-          <p class="footer-title">Hi Dev Tools</p>
+          <p class="footer-title">Hi Tools</p>
           <p class="footer-text">
-            Bộ tool nhỏ hỗ trợ Dev nội bộ Hi FPT: test API, format JSON, preview HTML, decode JWT...
+            Bộ tool nhỏ hỗ trợ Dev : test API, format JSON, preview HTML, decode JWT...
           </p>
         </div>
         <div class="footer-right">
           <p class="footer-meta">API base: {{ apiBase }}</p>
-          <p class="footer-meta">SSR · Nuxt 3 · Vue 3</p>
+          <p class="footer-meta">ChatGPT Coder · Nuxt 3 · Vue 3</p>
         </div>
       </div>
     </footer>

@@ -12,7 +12,7 @@
           v-model="input"
           class="textarea"
           rows="4"
-          placeholder="VD: HiFPT2025 + phone + contractId"
+          placeholder="VD: ABCD :: Năm ngày tháng : 0123456789"
         />
       </div>
 
@@ -170,7 +170,7 @@ label {
   font-size: 13px;
   padding: 4px 6px;
   border-radius: 6px;
-  background: #020617;
+  background: #fff;
   border: 1px solid var(--border-soft);
 }
 </style>

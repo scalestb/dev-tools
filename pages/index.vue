@@ -1,5 +1,6 @@
 <template>
   <div class="home-page">
+    <!-- HERO -->
     <section class="hero">
       <div class="hero-left">
         <h1>Hi Dev Tools</h1>
@@ -15,8 +16,12 @@
         </div>
 
         <div class="hero-actions">
-          <NuxtLink to="/tinh-nang/request-api-online" class="btn-primary">Thử Request API Online</NuxtLink>
-          <NuxtLink to="/tinh-nang/json-formatter" class="btn-secondary">Mở JSON Formatter</NuxtLink>
+          <NuxtLink to="/tinh-nang/md5-generator" class="btn-primary">
+            Tạo mã MD5
+          </NuxtLink>
+          <NuxtLink to="/tinh-nang/json-formatter" class="btn-secondary">
+            Mở JSON Formatter
+          </NuxtLink>
         </div>
       </div>
 
@@ -35,6 +40,7 @@
       </div>
     </section>
 
+    <!-- POSTS -->
     <section class="section">
       <h2>Bài viết mới</h2>
       <div class="card">
@@ -48,18 +54,26 @@
       </div>
     </section>
 
+    <!-- FEATURE MENU (kiểu icon điện thoại) -->
     <section class="section">
-      <h2>Danh sách tính năng</h2>
-      <div class="features-grid">
+      <div class="section-header">
+        <h2>Danh sách tính năng</h2>
+        <p class="section-sub">Chạm vào icon để mở tool!</p>
+      </div>
+
+      <div class="feature-menu-grid">
         <NuxtLink
-          v-for="feat in homeData?.features || featuresFallback"
+          v-for="feat in featureItems"
           :key="feat.key"
           :to="`/tinh-nang/${feat.key}`"
-          class="feature-card"
+          class="feature-menu-item"
         >
-          <h3>{{ feat.name }}</h3>
-          <p>{{ feat.description }}</p>
-          <span class="feature-link">Mở tính năng →</span>
+          <div class="feature-icon" :style="{ background: feat.bg }">
+            <span class="feature-icon-text">{{ feat.icon }}</span>
+          </div>
+          <div class="feature-label">
+            {{ feat.name }}
+          </div>
         </NuxtLink>
       </div>
     </section>
@@ -69,38 +83,63 @@
 <script setup lang="ts">
 const { data: homeData } = await useFetch('/api/home')
 
-const featuresFallback = [
+// base config cho từng tính năng + icon (dạng menu mobile)
+const featuresBase = [
   {
     key: 'request-api-online',
-    name: 'Request API Online',
+    name: 'Request API',
     description: 'Gửi thử request đến các API công khai, xem header/body response.',
+    icon: '🔌',
+    bg: '#e6f0ff', // xanh nhạt
   },
   {
     key: 'json-formatter',
-    name: 'JSON Formatter',
+    name: 'JSON',
     description: 'Dán JSON và định dạng lại, highlight đẹp, dễ debug.',
+    icon: '🧩',
+    bg: '#fff3df', // cam nhạt
   },
   {
     key: 'html-viewer',
-    name: 'HTML Viewer',
+    name: 'HTML',
     description: 'Dán HTML snippet và xem trước kết quả render.',
+    icon: '🧾',
+    bg: '#e8f9ff',
   },
   {
     key: 'color-css',
     name: 'Color CSS',
     description: 'Chọn màu, xem mã HEX, RGB, HSL để đưa vào CSS.',
+    icon: '🎨',
+    bg: '#f3e8ff',
   },
   {
     key: 'jwt-decoder',
     name: 'JWT Decoder',
     description: 'Dán JWT, decode header & payload, xem claim.',
+    icon: '🔐',
+    bg: '#e0fbea',
   },
   {
     key: 'md5-generator',
-    name: 'MD5 Generator',
+    name: 'MD5',
     description: 'Nhập chuỗi, sinh ra mã băm MD5.',
+    icon: '#️⃣',
+    bg: '#ffe4f0',
   },
 ]
+
+// merge mô tả từ API (nếu có) + icon định sẵn
+const featureItems = computed(() => {
+  const apiFeatures = homeData.value?.features || []
+  return featuresBase.map((base) => {
+    const found = apiFeatures.find((f: any) => f.key === base.key)
+    return {
+      ...base,
+      description: found?.description || base.description,
+    }
+  })
+})
 </script>
 
 <style scoped>
@@ -110,6 +149,8 @@ const featuresFallback = [
   gap: 24px;
 }
 
+/* HERO */
+
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
@@ -117,14 +158,16 @@ const featuresFallback = [
 }
 
 .hero-left h1 {
-  font-size: 32px;
-  margin-bottom: 8px;
+  font-size: 28px;
+  margin-bottom: 6px;
+  color: var(--primary-dark);
 }
 
 .hero-sub {
   margin: 0;
   color: var(--text-muted);
   max-width: 540px;
+  font-size: 13px;
 }
 
 .hero-meta {
@@ -138,22 +181,22 @@ const featuresFallback = [
   font-size: 11px;
   padding: 4px 8px;
   border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent);
+  background: var(--primary-soft);
+  color: var(--primary-dark);
 }
 
 .badge-success {
-  background: rgba(74, 222, 128, 0.12);
-  color: var(--success);
+  background: #e0fbea;
+  color: #15803d;
 }
 
 .badge-warning {
-  background: rgba(249, 115, 22, 0.12);
-  color: #fb923c;
+  background: #fff3df;
+  color: #ea580c;
 }
 
 .hero-actions {
-  margin-top: 16px;
+  margin-top: 14px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -163,14 +206,14 @@ const featuresFallback = [
 .btn-secondary {
   padding: 8px 14px;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 13px;
   border: 1px solid transparent;
   cursor: pointer;
 }
 
 .btn-primary {
   background: var(--accent);
-  color: #020617;
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -179,42 +222,45 @@ const featuresFallback = [
 }
 
 .btn-secondary {
-  background: transparent;
-  border-color: rgba(148, 163, 184, 0.5);
+  background: #ffffff;
+  border-color: var(--border-soft);
   color: var(--text-muted);
 }
 
 .btn-secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 .hero-card {
   background: var(--card-bg);
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid var(--border-soft);
-  padding: 16px;
+  padding: 14px;
 }
 
 .hero-card h3 {
   margin: 0 0 10px;
-  font-size: 16px;
+  font-size: 15px;
 }
+
+/* COMMON SECTION */
 
 .section {
   margin-top: 4px;
 }
 
 .section h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: var(--primary-dark);
 }
 
 .card {
   background: var(--card-bg);
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid var(--border-soft);
-  padding: 16px;
+  padding: 14px;
 }
 
 .list {
@@ -225,7 +271,7 @@ const featuresFallback = [
 
 .list-compact .list-item {
   padding: 8px 0;
-  border-bottom: 1px dashed rgba(148, 163, 184, 0.3);
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.4);
 }
 
 .list-item:last-child {
@@ -251,43 +297,65 @@ const featuresFallback = [
   color: var(--text-muted);
 }
 
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 14px;
-}
+/* FEATURE MENU (icon kiểu mobile) */
 
-.feature-card {
-  background: var(--card-bg);
-  border-radius: 16px;
-  border: 1px solid var(--border-soft);
-  padding: 14px;
+.section-header {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 14px;
+  gap: 2px;
+  margin-bottom: 8px;
 }
 
-.feature-card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.3);
-}
-
-.feature-card h3 {
+.section-sub {
   margin: 0;
-  font-size: 16px;
-}
-
-.feature-card p {
-  margin: 0;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
-.feature-link {
-  margin-top: 4px;
-  font-size: 12px;
-  color: var(--accent);
+.feature-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 12px 8px;
+  padding: 8px 4px 0;
 }
+
+.feature-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.feature-menu-item:hover .feature-icon {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(15, 23, 42, 0.15);
+}
+
+.feature-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.feature-icon-text {
+  font-size: 26px;
+}
+
+.feature-label {
+  font-size: 11px;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
   .hero {

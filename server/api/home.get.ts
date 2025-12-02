@@ -13,21 +13,21 @@ export default defineEventHandler(async (event) => {
       announcements: [
         {
           id: 1,
-          title: 'Chào mừng đến Hi Dev Tools',
-          content: 'Bộ tool nội bộ hỗ trợ dev Hi FPT – version 0.1.0.',
+          title: 'Chào mừng đến Hi Tools',
+          content: 'Bộ tool cùi mía hỗ trợ dev – version 0.1.0.',
           created_at: '2025-12-02',
         },
       ],
       posts: [
         {
           id: 1,
-          title: 'Giới thiệu Request API Online',
+          title: 'Giới thiệu Test 01',
           slug: 'gioi-thieu-request-api-online',
           created_at: '2025-12-01',
         },
         {
           id: 2,
-          title: 'JSON Formatter cho log Hi FPT',
+          title: 'JSON Formatter Test 02',
           slug: 'json-formatter-cho-log-hi-fpt',
           created_at: '2025-12-01',
         },

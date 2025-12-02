@@ -191,7 +191,7 @@ const hslString = computed(() => {
   font-size: 13px;
   padding: 3px 6px;
   border-radius: 6px;
-  background: #020617;
+  background: #fff;
   border: 1px solid var(--border-soft);
 }
 
