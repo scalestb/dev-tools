@@ -127,7 +127,22 @@ const featuresBase = [
     icon: '#️⃣',
     bg: '#ffe4f0',
   },
+  {
+    key: 'short-link',
+    name: 'Rút gọn link',
+    description: 'Tạo link ngắn gọn từ URL dài, thuận tiện chia sẻ cho người khác.',
+    icon: '🔗',
+    bg: '#e0f2fe',
+  },
+  {
+    key: 'boc-tham',
+    name: 'Bốc thăm',
+    description: 'Nhập danh sách tên và bốc ngẫu nhiên từ hộp quà 🎁.',
+    icon: '🎁',
+    bg: '#fef3c7',
+  },
 ]
+
 
 // merge mô tả từ API (nếu có) + icon định sẵn
 const featureItems = computed(() => {

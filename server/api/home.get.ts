@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
           created_at: '2025-12-01',
         },
       ],
-      features: [
+            features: [
         {
           key: 'request-api-online',
           name: 'Request API Online',
@@ -62,6 +62,16 @@ export default defineEventHandler(async (event) => {
           key: 'md5-generator',
           name: 'MD5 Generator',
           description: 'Nhập chuỗi, sinh ra mã băm MD5.',
+        },
+        {
+          key: 'short-link',
+          name: 'Rút gọn link',
+          description: 'Tạo link ngắn gọn từ URL dài, thuận tiện chia sẻ.',
+        },
+        {
+          key: 'boc-tham',
+          name: 'Bốc thăm',
+          description: 'Nhập danh sách tên và bốc ngẫu nhiên một người trúng thưởng.',
         },
       ],
     }
