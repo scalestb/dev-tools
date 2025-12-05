@@ -200,10 +200,12 @@ a {
 }
 
 .main-inner {
-  max-width: 1120px;
+  width: 100%;
+  max-width: 95%;
   margin: 18px auto 24px;
   padding: 0 16px 24px;
 }
+
 
 /* FOOTER */
 
